@@ -22,6 +22,8 @@
 //functions
 void read_level(, IFSTREAM& input_file);
 
+void store_data(Board& board);
+
 void display_board(, OFSTREAM& output);
 
 void path_solver();
