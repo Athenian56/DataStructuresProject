@@ -10,11 +10,13 @@
 #define BCUBED_H
 
 #include <iostream>
+#include <unordered_map>
 #include <cstdlib>
 #include <fstream>
 #include "board.h"
 
 #define COUT std::cout
+#define UNOR_MAP std::unordered_map
 #define ENDL std::endl
 #define IFSTREAM std::ifstream
 #define OFSTREAM std::ofstream
@@ -22,7 +24,7 @@
 //functions
 void read_level(, IFSTREAM& input_file);
 
-void store_data(Board& board);
+void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
 
 void display_board(, OFSTREAM& output);
 

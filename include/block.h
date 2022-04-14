@@ -35,6 +35,38 @@ struct Block{
 
     //Block functions
     
+    // checks for possible movements around passed in block, and returns pointer to blocks
+    // around the passed in block
+    Block* check_block_moves(const Board& origin){
+            //loop through SLL to check coordinates
+            for(Block* next = board.origin; next; next->next){
+                if(next->x == x+1 && !(RIGHT & flag)){
+                    //set flag at curr block to say that the block has checked and has
+                    //a block to the right so that it doesn't check again and keep in loop
+                    flag |= RIGHT;
+                    return next;
+                }
+                else if(next->x == x-1 && !(LEFT & flag)){
+                    flag |= LEFT;
+                    return next;
+                }
+                else if(next->y == y+1 && !(UP & flag)){
+                    flag |= UP;
+                    return next;
+                }
+                else if(next->y == y-1 && !(DOWN & flag)){
+                    flag |= DOWN;
+                    return next;
+                }
+            }
+        
+        //if board has gone through whole list and flag hasn't changed
+        //set flag to say that there were no moves for this block
+        if (curr->flag == 0)
+            curr->flag |= NO_MOVES;
+        return NULL;
+    }
+    
     /* Special Block functions
      * Jacob's section
      */
