@@ -26,44 +26,46 @@ struct Block{
         VECTOR<Block*> destins; //contains pointers to blocks that are possible moves
     
     //default constructor           for default blocks
-    Block( x_in, y_in ):
-        mode(1), state(1), x( x_in ), y( y_in ), next(NULL), destins(), flag(0){}
+    Block(int x_in, int y_in ):
+        mode(1), flag(0), state(1), x( x_in ), y( y_in ), next(NULL), destins() {}
     
     //overload constructor          for special blocks
-    Block(int mode_in, x_in, y_in):
-        mode( mode_in ), state(1), x( x_in ), y( y_in ), next(NULL), destins(), flag(0) {}
+    Block(int mode_in,int x_in, int y_in):
+        mode( mode_in ), flag(0), state(1), x( x_in ), y( y_in ), next(NULL), destins() {}
 
     //Block functions
     
     // checks for possible movements around passed in block, and returns pointer to blocks
     // around the passed in block
-    Block* check_block_moves(const Board& origin){
-            //loop through SLL to check coordinates
-            for(Block* next = board.origin; next; next->next){
-                if(next->x == x+1 && !(RIGHT & flag)){
-                    //set flag at curr block to say that the block has checked and has
-                    //a block to the right so that it doesn't check again and keep in loop
-                    flag |= RIGHT;
-                    return next;
-                }
-                else if(next->x == x-1 && !(LEFT & flag)){
-                    flag |= LEFT;
-                    return next;
-                }
-                else if(next->y == y+1 && !(UP & flag)){
-                    flag |= UP;
-                    return next;
-                }
-                else if(next->y == y-1 && !(DOWN & flag)){
-                    flag |= DOWN;
-                    return next;
-                }
+    Block* check_block_moves(Block& origin){
+        //loop through SLL to check coordinates
+        Block *iter = &origin;
+        while(iter != NULL){
+            if(iter->x == x+1 && !(RIGHT & flag)){
+                //set flag at curr block to say that the block has checked and has
+                //a block to the right so that it doesn't check again and keep in loop
+                flag |= RIGHT;
+                return next;
             }
+            else if(iter->x == x-1 && !(LEFT & flag)){
+                flag |= LEFT;
+                return next;
+            }
+            else if(iter->y == y+1 && !(UP & flag)){
+                flag |= UP;
+                return next;
+            }
+            else if(iter->y == y-1 && !(DOWN & flag)){
+                flag |= DOWN;
+                return next;
+            }
+            iter = iter->next;
+        }
         
         //if board has gone through whole list and flag hasn't changed
         //set flag to say that there were no moves for this block
-        if (curr->flag == 0)
-            curr->flag |= NO_MOVES;
+        if (flag == 0)
+            flag |= NO_MOVES;
         return NULL;
     }
     

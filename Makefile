@@ -5,7 +5,7 @@
 
 # Compiler Variables
 CC := g++
-FLAGS := -O2 -g -Wall -Wextra -Wconversion -Wshadow -lm
+FLAGS := -O2 -g -Wall -Wextra -Wconversion -Wshadow -Werror -lm
 CXXFLAGS := -m64 -std=c++11 $(FLAGS)
 
 # Folder Variables
@@ -20,21 +20,26 @@ FUNC := bcubed
 
 # Make initialize
 initialize:
-	rm -rf $(OBJ) $(EXE)
-	mkdir $(OBJ) $(EXE)
+	@echo Initializing...
+	@rm -rf $(OBJ) $(EXE)
+	@mkdir $(OBJ) $(EXE)
 
 # Make Final Project
 $(OBJ)/$(FUNC).o: $(SRC)/$(FUNC).cpp
+	@echo Linking stuff...
 	$(CC) $(CXXFLAGS) -c $(SRC)/$(FUNC).cpp -o $@
 
 $(OBJ)/$(MAIN).o: $(SRC)/$(MAIN).cpp
-	$(CC) $(CXXFLAGS) -c $(SRC)/$(MAIN).cpp -o $@
+	@echo Linking project...
+	@$(CC) $(CXXFLAGS) -c $(SRC)/$(MAIN).cpp -o $@
 
-MainObjs := $(OBJ)/$(FUNC).o $(OBJ)/$(MAIN).o
+ProjectObjs := $(OBJ)/$(FUNC).o $(OBJ)/$(MAIN).o
 
-Main := $(initialize) $(MainObjs)
-	$(CC) $(CXXFLAGS) -o $(EXE)/$(MAIN) $(MainObjs)
+Project: $(ProjectObjs)
+	@echo Compiling executable...
+	@$(CC) $(CXXFLAGS) -o $(EXE)/$(MAIN) $(ProjectObjs)
 
 # Make clean
 clean:
-	rm -rf $(OBJ)/* $(EXE)/*
+	@echo Cleaning...
+	@rm -rf $(OBJ)/* $(EXE)/*

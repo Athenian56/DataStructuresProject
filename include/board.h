@@ -10,15 +10,13 @@
 
 #include "block.h"
 
-#define 
-
 struct Board{
-
+    //SLL????
     public: 
         Block* origin;            //put origin here, use to traverse SLL                     
 
     //default Constructor
-    Board(): curr_Block(NULL) {}
+    Board(): origin(NULL) {}
 
     //board functions
   

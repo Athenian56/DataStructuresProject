@@ -22,11 +22,11 @@
 #define OFSTREAM std::ofstream
 
 //functions
-void read_level(, IFSTREAM& input_file);
+void read_level(Board& board, IFSTREAM& input_file);
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
 
-void display_board(, OFSTREAM& output);
+void display_board(OFSTREAM& output);
 
 void path_solver();
 
