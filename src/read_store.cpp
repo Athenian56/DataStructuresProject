@@ -11,13 +11,24 @@
 
 void read_level(Board& board, IFSTREAM& input_file){
     
+    
 }
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
     //pointer that will traverse board and store data into hash map
-    Block *curr = board.origin;
-    //since down is last check of moves, check until down has ran, or no_moves
-    while((curr->flag & NO_MOVES) || (curr->flag & DOWN)){
-        // curr->destins.push_back(curr->check_block_moves(curr));
+    for(Block* curr = board.origin; curr; curr = curr->next){
+        //since down is last check of moves, check until down has ran, or no_moves
+        //inputting for each block in board
+        while((curr->flag & NO_MOVES) || (curr->flag & DOWN)){
+            int temp = curr->check_block_moves(curr);
+            if (temp != -1)
+                curr->destins.push_back(temp);
+        }
     }
+
+    //store data into hash map for solver
+    for(Block* curr = board.origin; curr; curr = curr->next){
+        solver_data.insert({ curr->index, curr->destins });
+    }
+
 }

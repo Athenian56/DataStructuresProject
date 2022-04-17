@@ -7,14 +7,14 @@
  ************************************************/
 #include "../include/bcubed.h"
 
-/*
+
 void read_level(Board& board, IFSTREAM& input_file){
     
 } // 
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
 
-}
+} /*
 
 //create seperate files that contain the include statement so we can all work on different 
 //parts
