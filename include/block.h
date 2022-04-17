@@ -20,7 +20,7 @@ struct Block{
     public:
         int mode;               //int mode is for the type of block
         int flag;               //used to check movements of block
-        int index;
+        int index;              
         int state;              //int state is for the active state of the block
         int x, y;               //these ints are for where to place block
         Block *next;            //points to next block in path, SLL for solver
@@ -36,7 +36,7 @@ struct Block{
 
     //Block functions
     
-    // checks for possible movements around passed in block, and returns pointer to blocks
+    // checks for possible movements around passed in block, and returns index of block
     // around the passed in block
     int check_block_moves(Block*& origin){
         //loop through SLL to check coordinates
