@@ -46,7 +46,7 @@ struct Board{
                 return;
             }
             // if not new, cycle through SLL until next is null
-            for(Block* curr= origin->next;curr;curr = curr->next){
+            for(Block* curr= origin;curr;curr = curr->next){
                     if(curr->next == NULL){
                         curr->next = temp_block;
                         return;

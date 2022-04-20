@@ -15,9 +15,7 @@
 #include <fstream>
 #include "board.h"
 
-#define COUT std::cout
 #define UNOR_MAP std::unordered_map
-#define ENDL std::endl
 #define IFSTREAM std::ifstream
 #define OFSTREAM std::ofstream
 

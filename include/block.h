@@ -10,6 +10,8 @@
 
 #include <vector>
 #define VECTOR std::vector
+#define COUT std::cout
+#define ENDL std::endl
 #define RIGHT     1<<0
 #define LEFT      1<<1
 #define UP        1<<2
@@ -38,29 +40,31 @@ struct Block{
     
     // checks for possible movements around passed in block, and returns index of block
     // around the passed in block
-    int check_block_moves(Block*& origin){
+    int check_block_moves(Block*& board){
         //loop through SLL to check coordinates
-        Block *iter = origin;
-        while(iter != NULL){
-            if(iter->x == x+1 && !(RIGHT & flag)){
+        for(Block* iter = board; iter; iter = iter->next){
+            if((iter->x == x+1 && iter->y == y) && !((RIGHT & flag) == RIGHT)){
                 //set flag at curr block to say that the block has checked and has
                 //a block to the right so that it doesn't check again and keep in loop
                 flag |= RIGHT;
-                return next->index;
+                //COUT << index << "Hit right" << next->index << ENDL;
+                return iter->index;
             }
-            else if(iter->x == x-1 && !(LEFT & flag)){
+            else if((iter->x == x-1 && iter->y == y) && !((LEFT & flag) == LEFT)){
                 flag |= LEFT;
-                return next->index;
+                //COUT << "Hit left" << ENDL;
+                return iter->index;
             }
-            else if(iter->y == y+1 && !(UP & flag)){
+            else if((iter->y == y+1 && iter->x == x) && !((UP & flag) == UP)){
                 flag |= UP;
-                return next->index;
+                //COUT << "Hit up" << ENDL;
+                return iter->index;
             }
-            else if(iter->y == y-1 && !(DOWN & flag)){
+            else if((iter->y == y-1 && iter->x == x) && !((DOWN & flag) == DOWN)){
                 flag |= DOWN;
-                return next->index;
+                //COUT << "Hit down" << ENDL;
+                return iter->index;
             }
-            iter = iter->next;
         }
         
         //if board has gone through whole list and flag hasn't changed
