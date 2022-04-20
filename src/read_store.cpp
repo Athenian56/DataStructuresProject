@@ -29,9 +29,6 @@ void read_level(Board& board, IFSTREAM& input_file){
                 mode = 2;
                 break;
                 
-            case ' ':
-                break;
-
             case '0':               //inactive / no block
                 x++;                // skips position
                 increase = false;
