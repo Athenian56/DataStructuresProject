@@ -26,7 +26,7 @@ initialize:
 
 # Make Final Project
 $(OBJ)/$(FUNC).o: $(SRC)/$(FUNC).cpp
-	@echo Linking stuff...
+	@echo Linking functions...
 	$(CC) $(CXXFLAGS) -c $(SRC)/$(FUNC).cpp -o $@
 
 $(OBJ)/$(MAIN).o: $(SRC)/$(MAIN).cpp
@@ -43,3 +43,25 @@ Project: $(ProjectObjs)
 clean:
 	@echo Cleaning...
 	@rm -rf $(OBJ)/* $(EXE)/*
+
+
+
+# Make testing
+$(OBJ)/test.o: $(SRC)/test.cpp
+	@echo Linking test...
+	@$(CC) $(CXXFLAGS) -c $(SRC)/test.cpp -o $@
+
+$(OBJ)/read_store.o: $(SRC)/read_store.cpp
+	@echo Linking test functions...
+	@$(CC) $(CXXFLAGS) -c $(SRC)/read_store.cpp -o $@
+
+testObj := $(OBJ)/test.o $(OBJ)/read_store.o
+
+$(EXE)/test: $(testObj)
+	@echo Compiling test executable...
+	@$(CC) $(CXXFLAGS) -o $(EXE)/test $(testObj)
+
+testing: $(EXE)/test
+	$(EXE)/./test lvls/level1.txt
+
+
