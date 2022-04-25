@@ -20,6 +20,8 @@
 #define OFSTREAM std::ofstream
 
 //functions
+void usage(int,char *progname);
+
 void read_level(Board& board, IFSTREAM& input_file);
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
