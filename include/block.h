@@ -76,7 +76,21 @@ struct Block{
     
     /* Special Block functions
      * Jacob's section
+     * Will do when we figure get test case working 
      */
+
+    /*
+
+    //function to acitvate other blocks when a secial block is landed on, will be called in solving algorithm 
+    int activate_special(){
+
+    }
+
+
+    */
+
+    
+
 };
 
 #endif
