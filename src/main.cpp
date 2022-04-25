@@ -14,8 +14,9 @@ int main(int argc, char *argv[]){
     if(argc != 2){  //sends to function telling user how to use main
         usage(argc,argv[0]); //tells the user that they ned more than one argument 
     } 
+    /* Solve Puzzle */
 
-    
 
+    /* Return 0 if Successful */
     return 0;
 }

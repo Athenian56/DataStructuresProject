@@ -11,9 +11,9 @@ int main(int argc, char* argv[]){
     
     COUT << ENDL;
     COUT << "Board inputs" << ENDL;
-    COUT << "(x, y),  mode,  index"<< ENDL;
+    COUT << "( x  ,  y ),     mode,    index"<< ENDL;
     for(Block* curr = board.origin; curr; curr = curr->next){
-        COUT << "(" << curr->x << ", " << curr->y << "),    " << curr->mode << ",      " << curr->index<< ENDL;
+        COUT << "(" << std::setw(2) << curr->x << "  , " << std::setw(2) << curr->y << " ),    " << std::setw(3) << curr->mode << ",      " <<  std::setw(3) << curr->index<< ENDL;
     }
 
     COUT << ENDL;
@@ -23,11 +23,11 @@ int main(int argc, char* argv[]){
     COUT << "hash table" << ENDL;
     COUT << "Index\t\tDestins" << ENDL;
     for(long unsigned int i = 0; i < solver_data.size(); i++){
-        COUT << "  " << i << "\t\t";
+        COUT << "  " << std::setw(2) << i << "\t\t";
         for(long unsigned int j = 0; j < solver_data[(int)i].size(); j++){
             if (j != 0)
                 COUT << ", ";
-            COUT << solver_data[(int)i][j];
+            COUT << std::setw(2) << solver_data[(int)i][j];
         }
         COUT << ENDL;
     }
