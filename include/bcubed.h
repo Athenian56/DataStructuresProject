@@ -10,6 +10,7 @@
 #define BCUBED_H
 
 #include <iostream>
+#include <iomanip>
 #include <unordered_map>
 #include <cstdlib>
 #include <fstream>
