@@ -28,8 +28,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     
 
     //want to loop through one character at a time
-    while(input_file >> temp){i
-        bool increase = true;
+    while(input_file >> temp){ 
         switch(temp){
             case '1':               //normal block
                 mode = 1;
@@ -45,7 +44,7 @@ void read_level(Board& board, IFSTREAM& input_file){
                 
             case '0':               //inactive / no block
                 x++;                // skips position
-                increase = false;
+                //increase = false;
                 break;
 
             case 'N': //end of a line on the board 
@@ -61,7 +60,7 @@ void read_level(Board& board, IFSTREAM& input_file){
 
             case 'B': //block that activates a bridge between two other blocks
                 /* input a vector of coordinates that the block would activate */
-                mode = 3;
+                mode = 4;
                 break;
             
             case 'b':
@@ -70,12 +69,12 @@ void read_level(Board& board, IFSTREAM& input_file){
 
         }
         //if character is a read in, then delcare new block and push to board
-        if(increase){ 
-            //Block* load_block = new Block(mode, x, y, index);
-            board.push(x, y, mode, index);
-            index++;
-            x++;
-        }
+        // if(increase){ 
+        //     //Block* load_block = new Block(mode, x, y, index);
+        //     board.push(x, y, mode, index);
+        //     index++;
+        //     x++;
+        // }
             
     }
 }
