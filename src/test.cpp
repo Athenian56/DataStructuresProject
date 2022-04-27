@@ -19,6 +19,10 @@ int main(int argc, char* argv[]){
     COUT << ENDL;
     UNOR_MAP<int, VECTOR<int>> solver_data;
 
+	
+    COUT<<"Display board"<<ENDL;
+	 display_initial_board(board);
+
     store_data(board, solver_data);
     COUT << "hash table" << ENDL;
     COUT << "Index\t\tDestins" << ENDL;

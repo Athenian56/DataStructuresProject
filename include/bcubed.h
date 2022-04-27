@@ -25,9 +25,11 @@ void usage(int,char *progname);
 
 void read_level(Board& board, IFSTREAM& input_file);
 
+void display_initial_board(Board& board);
+
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
 
-void display_board(OFSTREAM& output);
+//void display_board(OFSTREAM& output);
 
 void path_solver();
 

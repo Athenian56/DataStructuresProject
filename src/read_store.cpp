@@ -13,8 +13,9 @@
 void read_level(Board& board, IFSTREAM& input_file){
     char temp;
     int index = 0, x=0, y=5, mode = 1;
-    
-
+   // VECTOR<int> rows_count;
+	 //int cols=0;
+	
     //want to loop through one character at a time
     while(input_file >> temp){
         bool increase = true;
@@ -38,6 +39,7 @@ void read_level(Board& board, IFSTREAM& input_file){
 
             case 'N': //end of a line on the board 
                 y--;
+					 //cols++;
                 x=0;
                 increase = false;
                 break;
@@ -66,6 +68,38 @@ void read_level(Board& board, IFSTREAM& input_file){
         }
             
     }
+}
+
+void display_initial_board(Board& board){
+	Block* curr=board.origin;
+	//for(long unsigned int i=0;i<board.size();i++){
+		//for(long unsigned int j=0;j<board[i].size();j++){
+		
+		for(Block* curr=board.origin;curr;curr=curr->next){
+			if(curr->mode==1){//regular block
+				std::cout<<"X";
+			}
+			else if(curr->mode==-1){//starting block
+				std::cout<<"S";
+			}
+			else if(curr->mode==2){//final block
+				std::cout<<"E";
+			}
+			else if(curr->mode==-2){//needs to be activated
+				std::cout<<"x";
+			}
+			else if(curr->mode==3){
+				std::cout<<"2";
+			}
+			else{
+				std::cout<<"0";
+			}
+			//curr=curr->next;
+		}
+		//}
+		COUT<<ENDL;
+	//}
+
 }
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){

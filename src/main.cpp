@@ -24,7 +24,10 @@ int main(int argc, char *argv[]){
     /* Solve Puzzle */
     UNOR_MAP<int, VECTOR<int>> solver_data;
     store_data(board, solver_data);
-
+	
+	 COUT<<"Printing Data"<<ENDL
+	 display_board(board);
+	 COUT<<ENDL;
     /* DEBUGGING */ 
     COUT << "hash table" << ENDL;
     COUT << "Index\t\tDestins" << ENDL;

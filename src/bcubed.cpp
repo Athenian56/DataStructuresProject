@@ -28,7 +28,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     
 
     //want to loop through one character at a time
-    while(input_file >> temp){
+    while(input_file >> temp){i
         bool increase = true;
         switch(temp){
             case '1':               //normal block
@@ -78,6 +78,18 @@ void read_level(Board& board, IFSTREAM& input_file){
         }
             
     }
+}
+
+void display_board(Board& board){
+	for(Block* curr=board.origin; curr;curr=curr->next){
+		if(curr->state==1){
+			std::cout<<"X";
+		}
+		else{
+			std::cout<<"0";
+		}
+	}
+
 }
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
