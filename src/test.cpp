@@ -20,8 +20,11 @@ int main(int argc, char* argv[]){
     UNOR_MAP<int, VECTOR<int>> solver_data;
 
 	
-    COUT<<"Display board"<<ENDL;
+    COUT<<"Display initial board"<<ENDL;
 	 display_initial_board(board);
+
+	 COUT<<"Display solved table"<<ENDL;
+	 //display_final_board(board);
 
     store_data(board, solver_data);
     COUT << "hash table" << ENDL;

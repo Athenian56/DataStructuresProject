@@ -9,12 +9,11 @@
  ************************************************/
 #include "../include/bcubed.h"
 
+#define MAX_SIZE 20
 
 void read_level(Board& board, IFSTREAM& input_file){
     char temp;
     int index = 0, x=0, y=5, mode = 1;
-   // VECTOR<int> rows_count;
-	 //int cols=0;
 	
     //want to loop through one character at a time
     while(input_file >> temp){
@@ -39,7 +38,6 @@ void read_level(Board& board, IFSTREAM& input_file){
 
             case 'N': //end of a line on the board 
                 y--;
-					 //cols++;
                 x=0;
                 increase = false;
                 break;
@@ -51,7 +49,7 @@ void read_level(Board& board, IFSTREAM& input_file){
 
             case 'B': //block that activates a bridge between two other blocks
                 /* input a vector of coordinates that the block would activate */
-                mode = 3;
+                mode = 4;
                 break;
             
             case 'b':
@@ -71,36 +69,47 @@ void read_level(Board& board, IFSTREAM& input_file){
 }
 
 void display_initial_board(Board& board){
-	Block* curr=board.origin;
-	//for(long unsigned int i=0;i<board.size();i++){
-		//for(long unsigned int j=0;j<board[i].size();j++){
+
+	VECTOR<char> vect(MAX_SIZE,'0');
+	VECTOR<VECTOR<char>> display (MAX_SIZE, vect);//create display of 0s.
 		
-		for(Block* curr=board.origin;curr;curr=curr->next){
+		for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, and change value at display based on mode at the coordinates
 			if(curr->mode==1){//regular block
-				std::cout<<"X";
+				display[curr->y][curr->x]='X';
 			}
 			else if(curr->mode==-1){//starting block
-				std::cout<<"S";
+				display[curr->y][curr->x]='S';
 			}
 			else if(curr->mode==2){//final block
-				std::cout<<"E";
+				display[curr->y][curr->x]='E';
 			}
 			else if(curr->mode==-2){//needs to be activated
-				std::cout<<"x";
+				display[curr->y][curr->x]='x';
 			}
-			else if(curr->mode==3){
-				std::cout<<"2";
+			else if(curr->mode==3){//can be used twice
+				display[curr->y][curr->x]='2';
+			}
+			else if(curr->mode==4){//bridge
+				display[curr->y][curr->x]='-';
 			}
 			else{
-				std::cout<<"0";
+				display[curr->y][curr->x]=0;
 			}
-			//curr=curr->next;
 		}
-		//}
+
+		for(long signed int i=MAX_SIZE-1;i>-1;i--){
+			for(long signed int j=0;j<MAX_SIZE;j++){
+				COUT<<display[i][j]<<" ";
+			}
+			COUT<<ENDL;
+		}
 		COUT<<ENDL;
-	//}
+	
 
 }
+
+
+
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
     //pointer that will traverse board and store data into hash map
