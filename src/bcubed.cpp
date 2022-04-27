@@ -23,10 +23,13 @@ void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
 void display_board(){
 
 }
+*/
 
 //deep
+//recursive algorithm to find path on board
 void path_solver(){
 
+	
+
 } 
-// */
 
