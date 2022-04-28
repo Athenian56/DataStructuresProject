@@ -104,6 +104,8 @@ void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned i
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
+	if(curr->mode == 2)
+		continue;
         //inputting for each block in board
         while(!((curr->flag & NO_MOVES) == NO_MOVES) || !((curr->flag & DOWN) == DOWN)){
             int temp = (int)curr->check_block_moves(board.origin);
