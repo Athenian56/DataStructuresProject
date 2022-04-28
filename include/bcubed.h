@@ -23,7 +23,6 @@
 #define IFSTREAM std::ifstream
 #define OFSTREAM std::ofstream
 #define STACK std::stack
-#define MAX_SIZE 16
 
 //functions
 void usage(int,char *progname);
