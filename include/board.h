@@ -61,16 +61,7 @@ struct Board{
             Block* new_origin = origin->next;
             delete origin;
             origin = new_origin;
-                /*for(Block* curr = origin->next; curr; curr = curr->next){
-                        if (curr->next == NULL){
-                            delete curr->next;
-                            return;
-                        }
-                } // */
         }
-  
-    
-
 };
 
 #endif

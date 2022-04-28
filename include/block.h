@@ -26,7 +26,7 @@ struct Block{
         int state;              //int state is for the active state of the block
         int x, y;               //these ints are for where to place block
         Block *next;            //points to next block in path, SLL for solver
-        VECTOR<int> destins; //contains pointers to blocks that are possible moves
+        VECTOR<long unsigned int> destins; //contains pointers to blocks that are possible moves
     
     //default constructor           for default blocks
     Block(int x_in, int y_in ):
@@ -71,7 +71,7 @@ struct Block{
         //set flag to say that there were no moves for this block
         if (flag == 0)
             flag |= NO_MOVES;
-        return -1;
+        return 999999;
     }
     
     /* Special Block functions

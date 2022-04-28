@@ -62,6 +62,7 @@ $(EXE)/test: $(testObj)
 	@$(CC) $(CXXFLAGS) -o $(EXE)/test $(testObj)
 
 testing: $(EXE)/test
-	$(EXE)/./test lvls/level4.txt
+
+	$(EXE)/./test lvls/level1.txt
 
 

@@ -68,7 +68,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     }
 }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 void key(){
 	COUT<<"Key for initial board display"<<ENDL;
 	COUT<<"X: regular cube"<<ENDL;
@@ -79,13 +79,13 @@ void key(){
 	COUT<<"-: bridge"<<ENDL;
 
 }
-=======
->>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
+//=======
+//>>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
 
 void display_initial_board(Board& board){
 
 	VECTOR<char> vect(MAX_SIZE,' ');
-	VECTOR<VECTOR<char>> display (MAX_SIZE, vect);//create display of 0s.
+	VECTOR<VECTOR <char> > display (MAX_SIZE, vect);//create display of 0s.
 		
 	for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, and change value at display based on mode at the coordinates
 		if(curr->mode==1){//regular block
@@ -127,7 +127,7 @@ void display_final_board(VECTOR<int>&path, Board& board){
 //loop through vector of ints
 
 	VECTOR<char> vect(MAX_SIZE,' ');
-	VECTOR<VECTOR<char>> display (MAX_SIZE, vect);//create display of 0s.
+	VECTOR<VECTOR<char> > display (MAX_SIZE, vect);//create display of 0s.
 
 		for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, set space on the board with the block's index
 			display[curr->y][curr->x]=(char)(curr->index);
@@ -173,13 +173,14 @@ void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
 	
 }
 
+void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data){    
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
         //inputting for each block in board
         while(!((curr->flag & NO_MOVES) == NO_MOVES) || !((curr->flag & DOWN) == DOWN)){
-            int temp = curr->check_block_moves(board.origin);
-            if (temp != -1)
+            long unsigned int temp = curr->check_block_moves(board.origin);
+            if (temp != 999999)
                 curr->destins.push_back(temp);
             else
                 break;

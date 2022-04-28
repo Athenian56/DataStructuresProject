@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
     }
 
     COUT << ENDL;
-    UNOR_MAP<int, VECTOR<int>> solver_data;
+    UNOR_MAP<long unsigned int, VECTOR<long unsigned int>> solver_data;
 
 	 key();
 	 COUT<<ENDL;

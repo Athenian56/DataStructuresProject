@@ -28,12 +28,12 @@ void read_level(Board& board, IFSTREAM& input_file){
     
 
     //want to loop through one character at a time
-<<<<<<< HEAD
+//<<<<<<< HEAD
     while(input_file >> temp){
         bool increase = true;
-=======
+//=======
     while(input_file >> temp){ 
->>>>>>> 7663d20a84669818ce34d92330d2ba82fb07a3db
+//>>>>>>> 7663d20a84669818ce34d92330d2ba82fb07a3db
         switch(temp){
             case '1':               //normal block
                 mode = 1;
@@ -84,9 +84,9 @@ void read_level(Board& board, IFSTREAM& input_file){
     }
 }
 
-<<<<<<< HEAD
-=======
-
+//<<<<<<< HEAD
+//=======
+/*
 void display_board(Board& board){
 	for(Block* curr=board.origin; curr;curr=curr->next){
 		if(curr->state==1){
@@ -96,10 +96,11 @@ void display_board(Board& board){
 			std::cout<<"0";
 		}
 	}
->>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
+}*/
+//>>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
 
 
-void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
+void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data){
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves

@@ -29,10 +29,10 @@ void usage(int,char *progname);
 
 void read_level(Board& board, IFSTREAM& input_file);
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 void key();
-=======
->>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
+//=======
+//>>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
 
 void display_initial_board(Board& board);
 
@@ -42,10 +42,10 @@ long unsigned int LinearSearch(VECTOR<int> &path, int x);
 
 void convert_vect(STACK<int>&s, VECTOR<int>&path);
 
-void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
+void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data);
 
 
-//void display_board(OFSTREAM& output);
+void display_board(OFSTREAM& output);
 
 void path_solver();
 
