@@ -76,7 +76,36 @@ struct Block{
     
     /* Special Block functions
      * Jacob's section
+     * Whenever we reach a block, we will check the block's mode
      */
+
+    void activate_special(Block*& board, Block block){
+        if(block.mode==1){ //if it's just a regualar block, return 
+            return; 
+        } 
+        /* acitvates the blocks special blocks */
+        else if (block.mode == 4){ //if the block is one that activates a "bridge"
+        /* iterate through board and find the blocks it activates, the ones set to mode -2, read in as bs */
+            for(Block* iter = board; iter; iter = iter->next){
+                if(iter->mode == -2)
+                    iter->mode = 1; //activate that block
+            }
+        } else if (block.mode == 3) //if the block can be used twice
+            block.mode = 1; // make it a regular block
+    }
+
+    /*
+
+    //function to acitvate other blocks when a secial block is landed on, will be called in solving algorithm 
+    int activate_special(){
+
+    }
+
+
+    */
+
+    
+
 };
 
 #endif

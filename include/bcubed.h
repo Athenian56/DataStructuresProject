@@ -10,6 +10,7 @@
 #define BCUBED_H
 
 #include <iostream>
+#include <iomanip>
 #include <unordered_map>
 #include <cstdlib>
 #include <fstream>
@@ -22,11 +23,16 @@
 #define OFSTREAM std::ofstream
 
 //functions
+void usage(int,char *progname);
+
 void read_level(Board& board, IFSTREAM& input_file);
 
-void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data);
 
-void display_board(OFSTREAM& output);
+void display_initial_board(Board& board);
+
+void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
+
+//void display_board(OFSTREAM& output);
 
 void path_solver();
 
