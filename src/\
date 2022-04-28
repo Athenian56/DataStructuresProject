@@ -19,25 +19,9 @@ int main(int argc, char* argv[]){
     COUT << ENDL;
     UNOR_MAP<int, VECTOR<int>> solver_data;
 
-	 key();
-	 COUT<<ENDL;
 	
-    COUT<<"Display initial board"<<ENDL;
+    COUT<<"Display board"<<ENDL;
 	 display_initial_board(board);
-
-	 STACK<int> test_stack;//initialize stack, will not need in main
-	 for(int i=0;i<25;i++){
-		 test_stack.push(i);
-	 }
-	
-	 COUT<<ENDL;
-
-	 VECTOR<int>test_path (test_stack.size(),0);//initialize path to have same size as stack, will need in main
-
-	 convert_vect(test_stack, test_path);
-
-	 COUT<<"Display solved table"<<ENDL;
-	 display_final_board(test_path,board);
 
     store_data(board, solver_data);
     COUT << "hash table" << ENDL;
@@ -51,7 +35,6 @@ int main(int argc, char* argv[]){
         }
         COUT << ENDL;
     }
-
 
 
     return 0;

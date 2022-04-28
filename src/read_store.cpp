@@ -68,6 +68,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     }
 }
 
+<<<<<<< HEAD
 void key(){
 	COUT<<"Key for initial board display"<<ENDL;
 	COUT<<"X: regular cube"<<ENDL;
@@ -78,6 +79,8 @@ void key(){
 	COUT<<"-: bridge"<<ENDL;
 
 }
+=======
+>>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
 
 void display_initial_board(Board& board){
 
@@ -170,8 +173,6 @@ void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
 	
 }
 
-
-void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
