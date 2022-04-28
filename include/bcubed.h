@@ -42,11 +42,13 @@ long unsigned int LinearSearch(VECTOR<int> &path, int x);
 
 void convert_vect(STACK<int>&s, VECTOR<int>&path);
 
-void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data);
+bool index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, VECTOR<int>& parents, VECTOR<bool>& visited);
 
+void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data);
+bool all_visited(VECTOR<bool>& visited);
 
 void display_board(OFSTREAM& output);
 
-void path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, STACK<int>& finalPath, long unsigned int& start);
+bool path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, STACK<int>& finalPath, long unsigned int& start);
 
 #endif

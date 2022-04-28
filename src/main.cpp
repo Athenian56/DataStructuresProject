@@ -37,18 +37,22 @@ int main(int argc, char *argv[]){
     display_initial_board(board);
 
 
-    path_solver(solver_data,sorted_path,start);
+    bool success = path_solver(solver_data,sorted_path,start);
+
+    if(success) COUT << "SUCCESS"<< ENDL;
 
 
     VECTOR<int>path (sorted_path.size(),0); //initialize path to have same size as stack, will need in main
-
-    // for (long unsigned int x = 0; x<sorted_path.size();x++){
-    //     COUT << sorted_path.top() <<ENDL;
-    //     sorted_path.pop();
-    // }
+    COUT<<"PATH AFTER CONVERSION"<<ENDL;
+     //for (long unsigned int x = 0; x<sorted_path.size();x++){
+     //    COUT << sorted_path.top() <<ENDL;
+     //    sorted_path.pop();
+    //}
 
     convert_vect(sorted_path, path);
-
+    // for(long unsigned int i=0;i<path.size()-1;i++){
+    //     COUT<<path[i]<<ENDL;
+    // }
     COUT<<"The final path is: "<<ENDL;
 	display_final_board(path,board);
 
