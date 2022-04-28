@@ -27,7 +27,7 @@
 //functions
 void usage(int,char *progname);
 
-void read_level(Board& board, IFSTREAM& input_file);
+void read_level(Board& board, IFSTREAM& input_file,long unsigned int& start);
 
 //<<<<<<< HEAD
 void key();
@@ -47,6 +47,6 @@ void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned i
 
 void display_board(OFSTREAM& output);
 
-void path_solver();
+void path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, STACK<int>& finalPath, long unsigned int& start);
 
 #endif

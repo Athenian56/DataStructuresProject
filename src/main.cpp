@@ -17,17 +17,56 @@ int main(int argc, char *argv[]){
 
     /* Read Level Input */
 	IFSTREAM bcubed_infile;
+    long unsigned int start;
     Board board; //intilizes board
     bcubed_infile.open( argv[1] ); //opens the input
-    read_level(board,bcubed_infile); //reads level
+    read_level(board,bcubed_infile,start); //reads level
+
+
 
     /* Solve Puzzle */
     UNOR_MAP<long unsigned int, VECTOR<long unsigned int>> solver_data;
+    STACK<int> sorted_path;
+    // VECTOR<int>path (sorted_path.size(),0);//initialize path to have same size as stack, will need in main
+
+    COUT << "STORE DATA" << ENDL;
     store_data(board, solver_data);
+
+
+    COUT << "INITIAL BOARD" << ENDL;
+    display_initial_board(board);
+
+    COUT << "SOLVING" << ENDL;
+    path_solver(solver_data,sorted_path,start);
+
+    COUT << "INITILIZING VECTOR" << ENDL;
+    VECTOR<int>path (sorted_path.size(),0); //initialize path to have same size as stack, will need in main
+
+    // for (long unsigned int x = 0; x<sorted_path.size();x++){
+    //     COUT << sorted_path.top() <<ENDL;
+    //     sorted_path.pop();
+    // }
+
+    // COUT << "CONVERTING VECTOR" << ENDL;
+    // convert_vect(sorted_path, path);
+
+    COUT<<"Display solved table"<<ENDL;
+	display_final_board(path,board);
+
+
+
+    COUT << ENDL;
+    COUT << "Board inputs" << ENDL;
+    COUT << "( x  ,  y ),     mode,    index"<< ENDL;
+    for(Block* curr = board.origin; curr; curr = curr->next){
+        COUT << "(" << std::setw(2) << curr->x << "  , " << std::setw(2) << curr->y << " ),    " << std::setw(3) << curr->mode << ",      " <<  std::setw(3) << curr->index<< ENDL;
+    }
+
+    COUT << ENDL;
 	
-	 COUT<<"Printing Data"<<ENDL;
+	//  COUT<<"Printing Data"<<ENDL;
 	 //display_board(board);
-	 COUT<<ENDL;
+	//  COUT<<ENDL;
     /* DEBUGGING */ 
     COUT << "hash table" << ENDL;
     COUT << "Index\t\tDestins" << ENDL;

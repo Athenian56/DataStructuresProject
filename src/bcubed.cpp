@@ -22,7 +22,7 @@ void usage(int argc,char *progname) {
      exit(1);
 }
 
-void read_level(Board& board, IFSTREAM& input_file){
+void read_level(Board& board, IFSTREAM& input_file, long unsigned int& start){
     char temp;
     int index = 0, x=0, y=5, mode = 1;
     
@@ -41,6 +41,7 @@ void read_level(Board& board, IFSTREAM& input_file){
 
             case 'S':               //starting block
                 mode = -1;
+				start = index;
                 break;
 
             case 'E':               //final block
@@ -49,7 +50,7 @@ void read_level(Board& board, IFSTREAM& input_file){
                 
             case '0':               //inactive / no block
                 x++;                // skips position
-                //increase = false;
+                increase = false;
                 break;
 
             case 'N': //end of a line on the board 
@@ -105,9 +106,12 @@ void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned i
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
         //inputting for each block in board
+		if(curr->mode==2){
+			continue;
+		}
         while(!((curr->flag & NO_MOVES) == NO_MOVES) || !((curr->flag & DOWN) == DOWN)){
             int temp = (int)curr->check_block_moves(board.origin);
-            if (temp != -1)
+            if (temp != 999999)
                 curr->destins.push_back(temp);
             else
                 break;
@@ -133,9 +137,9 @@ void key(){
 }
 
 void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
-	for(long signed int i=vec.size()-1;i>-1;i--){
-		
+	for(long signed int i=vec.size()-1;i>-1;i--){		
 		vec[i]=s.top();
+		COUT << vec[i] << ENDL;
 		s.pop();
 	}
 	COUT<<ENDL;
@@ -183,6 +187,8 @@ void display_initial_board(Board& board){
 	
 
 }
+
+
 
 void display_final_board(VECTOR<int>&path, Board& board){
 //loop through vector of ints
@@ -251,77 +257,111 @@ void display_board(){
 //private topological sorting algorithm to check single index using hashmap of a (index, indices of possible blocks)
 void index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, VECTOR<int>& parents, VECTOR<bool>& visited)
 {
-	long unsigned int iter;
+	long unsigned int count = 0;
+	// COUT << "Performing Index Check: " << ENDL;
+
 	
 	if ( !visited[ index ] )
 	{
 		//set visited index to true
 		visited [ index ] = true;
+
+		COUT << "SIZE: " << solver_data[index].size() << ENDL;
 		
 		//check each possible block
-		for ( iter = 0; iter < solver_data[index].size(); iter++ )
+		for ( long unsigned int iter = 0; iter < solver_data[index].size(); iter++ )
 		{
 			//if index of possible block has not been visited, resursive call is made
 			if ( !visited[ solver_data[ index ][ iter ] ] )
 			{
+				for(long unsigned int jter = 0; jter < parents.size(); jter++){
+					COUT << jter <<":  "<< parents[jter] << ENDL;	 
+					 if(parents[jter] == -1){
+						count++;
+					 }
+				}
+
+				COUT << "COUNT: " << count << ENDL;
+
+				if(count == 1) {
+					COUT << "returning" << ENDL;
+					return;
+				}
+
 				//set the possible block's parent as the current index
 				parents[ solver_data[ index ][ iter ] ] = (int)index;
 
 				//recursive call meant to run through the possible blocks of the current possible block and so on
-				index_check( solver_data[ index ][ iter ], solver_data, parents, visited );
+				//if(solver_data.size() == 0 )
+				index_check( solver_data[ index ][ iter ], solver_data, parents, visited);
+				//COUT << "RETURNING" << ENDL;
+
 			}
 		}
 	}
-
-	/*unsigned int iter;
-	VECTOR<int> path_indices();
-	VECTOR<bool> visited_indices(solver_data.size(), false);
-	VECTOR<int> visited_possible_blocks;
-
-	visited_indices[0] = true;
-
-	//assures all indices are included in path
-	while (path_indices.size() != solver_data.size())
-	{
-		//set the visited indices to true
-		if (! (visited_indices[solver_data[v]->second[iter]]))
-		{
-			visited_indices[solver_data[v]->second[iter]] = true;
-
-			//check each possble block (edge)
-
-
-		}
-	}
-
-		for (iter = 0; iter < solver_data[v])
-*/
 	
 }
 
-STACK<int> path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data)
-{
-	STACK<int> finalPath;
+// STACK<int> path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data)
+// {
+// 	STACK<int> finalPath;
 
-	VECTOR<int> parents(solver_data.size());
+// 	VECTOR<int> parents(solver_data.size());
 
-	VECTOR<bool> visited(solver_data.size());
+// 	VECTOR<bool> visited(solver_data.size());
 	
-	long unsigned int iter, sentinel = (solver_data.size()-1);
+// 	long unsigned int iter, sentinel = (solver_data.size()-1);
+
+// 	//set all of the visited elements to false
+// 	for( iter = 0; iter < solver_data.size(); iter++ )
+// 	{
+// 		visited[iter] = false;
+// 		parents[iter] = -1;
+// 	}
+	
+// 	//run the topsort for every index
+// 	for(iter = 0; iter < solver_data.size(); iter++ )
+// 	{
+// 		index_check( iter, solver_data, parents, visited );
+// 	}
+	
+// 	finalPath.push( (int)sentinel );
+
+// 	while ( parents[sentinel] != -1 )
+// 	{
+// 		finalPath.push( parents[sentinel] );
+// 		sentinel = parents[sentinel];
+// 	}
+
+// 	return finalPath;
+// }
+
+void path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, STACK<int>& finalPath, long unsigned int& start)
+{
+	//STACK<int> finalPath;
+	//long unsigned int count = 0;
+
+	VECTOR<int> parents(solver_data.size(), -1);
+
+	VECTOR<bool> visited(solver_data.size(), false);
+	
+	long unsigned int sentinel = (solver_data.size()-1);
 
 	//set all of the visited elements to false
-	for( iter = 0; iter < solver_data.size(); iter++ )
-	{
-		visited[iter] = false;
-		parents[iter] = -1;
-	}
+	// for( iter = 0; iter < solver_data.size(); iter++ )
+	// {
+	// 	visited[iter] = false;
+	// 	parents[iter] = -1;
+	// }
 	
 	//run the topsort for every index
-	for(iter = 0; iter < solver_data.size(); iter++ )
-	{
-		index_check( iter, solver_data, parents, visited );
-	}
-	
+	// for(iter = 0; iter < solver_data.size(); iter++ )
+	// {
+	// 	index_check( iter, solver_data, parents, visited );
+	// }
+
+	index_check(start,solver_data,parents,visited);
+
 	finalPath.push( (int)sentinel );
 
 	while ( parents[sentinel] != -1 )
@@ -330,6 +370,7 @@ STACK<int> path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& s
 		sentinel = parents[sentinel];
 	}
 
-	return finalPath;
+	//return finalPath;
+	return;
 }
 

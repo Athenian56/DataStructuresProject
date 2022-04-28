@@ -7,7 +7,10 @@ int main(int argc, char* argv[]){
 
     Board board;
     IFSTREAM file_name(argv[1]);
-    read_level(board, file_name);
+    long unsigned int start;
+    read_level(board, file_name,start);
+
+    COUT << start << ENDL;
     
     COUT << ENDL;
     COUT << "Board inputs" << ENDL;

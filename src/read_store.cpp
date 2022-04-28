@@ -11,7 +11,7 @@
 
 #define MAX_SIZE 16
 
-void read_level(Board& board, IFSTREAM& input_file){
+void read_level(Board& board, IFSTREAM& input_file, long unsigned int& start){
     char temp;
     int index = 0, x=0, y=5, mode = 1;
 	
@@ -25,6 +25,7 @@ void read_level(Board& board, IFSTREAM& input_file){
 
             case 'S':               //starting block
                 mode = -1;
+				start = index;
                 break;
 
             case 'E':               //final block
@@ -178,6 +179,9 @@ void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned i
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
         //inputting for each block in board
+		if(curr->mode==2){
+			continue;
+		}
         while(!((curr->flag & NO_MOVES) == NO_MOVES) || !((curr->flag & DOWN) == DOWN)){
             long unsigned int temp = curr->check_block_moves(board.origin);
             if (temp != 999999)
