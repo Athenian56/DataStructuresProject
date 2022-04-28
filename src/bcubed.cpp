@@ -201,7 +201,7 @@ void display_final_board(VECTOR<int>&path, Board& board){
 	}
 	VECTOR<long unsigned int> vect(MAX_SIZE,999);
 	VECTOR<VECTOR<long unsigned int>> display (MAX_SIZE, vect);//create display of 0s.
-	COUT<<"BOARD:"<<ENDL;
+
 	//COUT<<board.origin->index<<ENDL;
 		for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, set space on the board with the block's index
 			display[curr->y][curr->x]=(curr->index);
