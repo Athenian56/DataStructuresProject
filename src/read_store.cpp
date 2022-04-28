@@ -9,8 +9,6 @@
  ************************************************/
 #include "../include/bcubed.h"
 
-#define MAX_SIZE 16
-
 void read_level(Board& board, IFSTREAM& input_file, long unsigned int& start){
     char temp;
     int index = 0, x=0, y=5, mode = 1;
@@ -69,7 +67,6 @@ void read_level(Board& board, IFSTREAM& input_file, long unsigned int& start){
     }
 }
 
-//<<<<<<< HEAD
 void key(){
 	COUT<<"Key for initial board display"<<ENDL;
 	COUT<<"X: regular cube"<<ENDL;
@@ -80,8 +77,6 @@ void key(){
 	COUT<<"-: bridge"<<ENDL;
 
 }
-//=======
-//>>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
 
 void display_initial_board(Board& board){
 
