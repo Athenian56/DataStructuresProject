@@ -14,9 +14,11 @@
 #include <unordered_map>
 #include <cstdlib>
 #include <fstream>
+#include <stack>
 #include "board.h"
 
 #define UNOR_MAP std::unordered_map
+#define STACK std::stack
 #define IFSTREAM std::ifstream
 #define OFSTREAM std::ofstream
 
@@ -24,6 +26,7 @@
 void usage(int,char *progname);
 
 void read_level(Board& board, IFSTREAM& input_file);
+
 
 void display_initial_board(Board& board);
 

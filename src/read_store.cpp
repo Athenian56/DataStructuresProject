@@ -68,6 +68,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     }
 }
 
+
 void display_initial_board(Board& board){
 
 	VECTOR<char> vect(MAX_SIZE,'0');
@@ -110,8 +111,6 @@ void display_initial_board(Board& board){
 
 
 
-
-void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
