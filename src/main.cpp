@@ -29,11 +29,11 @@ int main(int argc, char *argv[]){
     STACK<int> sorted_path;
     // VECTOR<int>path (sorted_path.size(),0);//initialize path to have same size as stack, will need in main
 
-
+    COUT << "STORE DATA" << ENDL;
     store_data(board, solver_data);
 
 
-    COUT << "Initial board: " << ENDL;
+    COUT << "INITIAL BOARD" << ENDL;
     display_initial_board(board);
 
 
@@ -49,11 +49,14 @@ int main(int argc, char *argv[]){
      //    sorted_path.pop();
     //}
 
+    COUT << "CONVERTING VECTOR" << ENDL;
     convert_vect(sorted_path, path);
+
     // for(long unsigned int i=0;i<path.size()-1;i++){
     //     COUT<<path[i]<<ENDL;
     // }
     COUT<<"The final path is: "<<ENDL;
+
 	display_final_board(path,board);
 
 
