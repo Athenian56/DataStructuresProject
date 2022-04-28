@@ -29,7 +29,7 @@ int main(int argc, char *argv[]){
     STACK<int> sorted_path;
     // VECTOR<int>path (sorted_path.size(),0);//initialize path to have same size as stack, will need in main
 
-    COUT << "STORE DATA" << ENDL;
+    //COUT << "STORE DATA" << ENDL;
     store_data(board, solver_data);
 
 
@@ -40,6 +40,10 @@ int main(int argc, char *argv[]){
     bool success = path_solver(solver_data,sorted_path,start);
 
     if(success) COUT << "SUCCESS"<< ENDL;
+    else{
+        COUT << "PUZZLE COULDN'T BE SOLVED!" << ENDL;
+        return 1;
+    }
 
 
     VECTOR<int>path (sorted_path.size(),0); //initialize path to have same size as stack, will need in main
@@ -50,6 +54,7 @@ int main(int argc, char *argv[]){
     //}
 
     COUT << "CONVERTING VECTOR" << ENDL;
+    COUT << sorted_path.size() << ENDL;
     convert_vect(sorted_path, path);
 
     // for(long unsigned int i=0;i<path.size()-1;i++){

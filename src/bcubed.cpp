@@ -143,10 +143,10 @@ void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
 	for(long unsigned int i=0;i<vec.size();i++){		
 		vec[i]=s.top();
 		
-		//  COUT << vec[i] << ENDL;
+		//COUT << vec[i] << ENDL;
 		s.pop();
 	}
-	COUT<<ENDL;
+	//COUT<<ENDL;
 	
 }
 
@@ -212,19 +212,21 @@ void display_final_board(VECTOR<int>&path, Board& board){
 		}
 		
 		
-		long unsigned int temp;
+		//long unsigned int temp;
 		int x;//to be searched
 		for(long signed int i=MAX_SIZE-1;i>-1;i--){
 			for(long signed int j=0;j<MAX_SIZE;j++){
 				if(display[i][j]!=999){//if index, search path for the index, and display index 
 					//COUT<<display[i][j]<<ENDL;
+						
+					long unsigned int temp;
 					x=(int)display[i][j];
 					//COUT<<x<< " ";
-					temp=LinearSearch(path, x);
+					temp = LinearSearch(path, x);
 					if(temp==0){
 						COUT<<std::setw(3)<<"S";
 					}	
-					else if(temp==999)
+					else if(temp == 999)
 						COUT<<std::setw(3)<<"E";
 					//COUT<<temp;
 					else
@@ -253,7 +255,7 @@ void display_final_board(VECTOR<int>&path, Board& board){
  }
 
 
-//deep
+
 //private topological sorting algorithm to check single index using hashmap of a (index, indices of possible blocks)
 // void index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, VECTOR<int>& parents, VECTOR<bool>& visited)
 // {
@@ -292,6 +294,7 @@ void display_final_board(VECTOR<int>&path, Board& board){
 
 bool index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data, VECTOR<int>& parents, VECTOR<bool>& visited)
 {
+	//VECTOR<int> solved_path;
 	long unsigned int count = 0;
 	
 	for(long unsigned int i = 0; i < parents.size(); i++){ //checkoing how many parents haven't been set 
@@ -315,7 +318,7 @@ bool index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<lon
 				visited[ solver_data[ index ][ iter ] ] = true;
 				parents[ solver_data[ index ][ iter ] ] = (int)index;
 				for(long unsigned int jter = 0; jter < parents.size(); jter++){
-					COUT << jter <<":  "<< parents[jter] << ENDL;	 
+					//COUT << jter <<":  "<< parents[jter] << ENDL;	  <---------------------------------------------UNCOMMENT LATER FOR SOLVED PATH
 					 if(parents[jter] == -1){
 						count++;
 					 }
@@ -363,17 +366,13 @@ bool path_solver(UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_
 	index_check(start,solver_data,parents,visited);
 
 	finalPath.push( (int)sentinel );
-	COUT<<"stack in path_solver:"<<ENDL;
-	 while ( parents[sentinel] != -1 )
-	 {
+	//COUT<<"stack in path_solver:"<<ENDL;
+	//long unsigned int counter = parents.size();
+	 while ( parents[sentinel] != -1) {
 	 	finalPath.push( parents[sentinel] );
-	 	COUT<<finalPath.top()<<ENDL;
+	 	//COUT<<finalPath.top()<<ENDL;
 	 	sentinel = parents[sentinel];
 	 }
-	//for(long unsigned int i = 1; i < parents.size(); i++){
-	//	finalPath.push( parents[i] );
-	//	COUT<<finalPath.top()<<ENDL;
-	//}
 
 	//return finalPath;
 	return true;
