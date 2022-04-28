@@ -13,16 +13,18 @@
 #include <unordered_map>
 #include <cstdlib>
 #include <fstream>
+#include <stack>
 #include "board.h"
 
 #define UNOR_MAP std::unordered_map
+#define STACK std::stack
 #define IFSTREAM std::ifstream
 #define OFSTREAM std::ofstream
 
 //functions
 void read_level(Board& board, IFSTREAM& input_file);
 
-void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
+void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned int>>& solver_data);
 
 void display_board(OFSTREAM& output);
 

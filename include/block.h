@@ -22,7 +22,7 @@ struct Block{
     public:
         int mode;               //int mode is for the type of block
         int flag;               //used to check movements of block
-        int index;              
+        long unsigned int index;              
         int state;              //int state is for the active state of the block
         int x, y;               //these ints are for where to place block
         Block *next;            //points to next block in path, SLL for solver
@@ -33,14 +33,14 @@ struct Block{
         mode(1), flag(0), index(), state(1), x( x_in ), y( y_in ), next(NULL), destins() {}
     
     //overload constructor          for special blocks
-    Block(int mode_in,int x_in, int y_in, int index_in):
+    Block(int mode_in,int x_in, int y_in, long unsigned int index_in):
         mode( mode_in ), flag(0), index(index_in), state(1), x( x_in ), y( y_in ), next(NULL), destins() {}
 
     //Block functions
     
     // checks for possible movements around passed in block, and returns index of block
     // around the passed in block
-    int check_block_moves(Block*& board){
+    long unsigned int check_block_moves(Block*& board){
         //loop through SLL to check coordinates
         for(Block* iter = board; iter; iter = iter->next){
             if((iter->x == x+1 && iter->y == y) && !((RIGHT & flag) == RIGHT)){

@@ -51,7 +51,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     }
 }
 
-void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
+void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<int>>& solver_data){
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
