@@ -25,9 +25,16 @@ void usage(int,char *progname);
 
 void read_level(Board& board, IFSTREAM& input_file);
 
+void key();
+
 void display_initial_board(Board& board);
 
+void display_final_board(VECTOR<int>&path, Board& board);
+
+long unsigned int LinearSearch(VECTOR<int> &path, int x);
+
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
+
 
 //void display_board(OFSTREAM& output);
 

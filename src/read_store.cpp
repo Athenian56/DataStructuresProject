@@ -9,7 +9,7 @@
  ************************************************/
 #include "../include/bcubed.h"
 
-#define MAX_SIZE 20
+#define MAX_SIZE 16
 
 void read_level(Board& board, IFSTREAM& input_file){
     char temp;
@@ -68,46 +68,97 @@ void read_level(Board& board, IFSTREAM& input_file){
     }
 }
 
+void key(){
+	COUT<<"Key for initial board display"<<ENDL;
+	COUT<<"X: regular cube"<<ENDL;
+	COUT<<"S: starting cube"<<ENDL;
+	COUT<<"E: ending cube"<<ENDL;
+	COUT<<"x: needs to be activated"<<ENDL;
+	COUT<<"2: can be used twice"<<ENDL;
+	COUT<<"-: bridge"<<ENDL;
+
+}
+
 void display_initial_board(Board& board){
 
-	VECTOR<char> vect(MAX_SIZE,'0');
+	VECTOR<char> vect(MAX_SIZE,' ');
 	VECTOR<VECTOR<char>> display (MAX_SIZE, vect);//create display of 0s.
 		
-		for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, and change value at display based on mode at the coordinates
-			if(curr->mode==1){//regular block
-				display[curr->y][curr->x]='X';
-			}
-			else if(curr->mode==-1){//starting block
-				display[curr->y][curr->x]='S';
-			}
-			else if(curr->mode==2){//final block
-				display[curr->y][curr->x]='E';
-			}
-			else if(curr->mode==-2){//needs to be activated
-				display[curr->y][curr->x]='x';
-			}
-			else if(curr->mode==3){//can be used twice
-				display[curr->y][curr->x]='2';
-			}
-			else if(curr->mode==4){//bridge
-				display[curr->y][curr->x]='-';
-			}
-			else{
-				display[curr->y][curr->x]=0;
-			}
+	for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, and change value at display based on mode at the coordinates
+		if(curr->mode==1){//regular block
+			display[curr->y][curr->x]='X';
 		}
+		else if(curr->mode==-1){//starting block
+			display[curr->y][curr->x]='S';
+		}
+		else if(curr->mode==2){//final block
+			display[curr->y][curr->x]='E';
+		}
+		else if(curr->mode==-2){//needs to be activated
+			display[curr->y][curr->x]='x';
+		}
+		else if(curr->mode==3){//can be used twice
+			display[curr->y][curr->x]='2';
+		}
+		else if(curr->mode==4){//bridge
+			display[curr->y][curr->x]='-';
+		}
+		else{
+			display[curr->y][curr->x]=0;
+		}
+	}
 
-		for(long signed int i=MAX_SIZE-1;i>-1;i--){
-			for(long signed int j=0;j<MAX_SIZE;j++){
-				COUT<<display[i][j]<<" ";
-			}
-			COUT<<ENDL;
+	
+	for(long signed int i=MAX_SIZE-1;i>-1;i--){
+		for(long signed int j=0;j<MAX_SIZE;j++){
+			COUT<<display[i][j]<<" ";
 		}
 		COUT<<ENDL;
+	}
+	COUT<<ENDL;
 	
 
 }
 
+void display_final_board(VECTOR<int>&path, Board& board){
+//loop through vector of ints
+
+	VECTOR<char> vect(MAX_SIZE,' ');
+	VECTOR<VECTOR<char>> display (MAX_SIZE, vect);//create display of 0s.
+
+		for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, set space on the board with the block's index
+			display[curr->y][curr->x]=(char)(curr->index);
+		}
+		
+		
+		long signed int temp;
+		int x;//to be searched
+		for(long signed int i=MAX_SIZE-1;i>-1;i--){
+			for(long signed int j=0;j<MAX_SIZE;j++){
+				if(display[i][j]!=' '){//if index, search path for the index, and display index 
+					x=(int)display[i][j];
+					temp=LinearSearch(path, x);	
+					COUT <<std::setw(3)<< temp;
+				}
+				
+				if(display[i][j]==' '){
+					COUT <<std::setw(3)<<" ";
+				}
+			}
+			COUT<<ENDL;
+		}
+		COUT<<ENDL;
+
+}
+
+long unsigned int LinearSearch(VECTOR<int> &path,int x){
+	for(long unsigned int i=0;i<path.size();i++){
+		if(path[i]==x){
+			return i;
+		}
+	}	
+	return -1;
+}
 
 
 

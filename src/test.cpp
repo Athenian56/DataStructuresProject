@@ -19,12 +19,18 @@ int main(int argc, char* argv[]){
     COUT << ENDL;
     UNOR_MAP<int, VECTOR<int>> solver_data;
 
+	 key();
+	 COUT<<ENDL;
 	
     COUT<<"Display initial board"<<ENDL;
 	 display_initial_board(board);
 
+	 VECTOR<int> test_path;
+	 for(int i=0;i<25;i++){
+		 test_path.push_back(i);
+	 }
 	 COUT<<"Display solved table"<<ENDL;
-	 //display_final_board(board);
+	 display_final_board(test_path,board);
 
     store_data(board, solver_data);
     COUT << "hash table" << ENDL;
