@@ -32,7 +32,7 @@ void read_level(Board& board, IFSTREAM& input_file){
     while(input_file >> temp){
         bool increase = true;
 //=======
-    while(input_file >> temp){ 
+ //   while(input_file >> temp){ 
 //>>>>>>> 7663d20a84669818ce34d92330d2ba82fb07a3db
         switch(temp){
             case '1':               //normal block
@@ -74,19 +74,19 @@ void read_level(Board& board, IFSTREAM& input_file){
 
         }
         //if character is a read in, then delcare new block and push to board
-        // if(increase){ 
-        //     //Block* load_block = new Block(mode, x, y, index);
-        //     board.push(x, y, mode, index);
-        //     index++;
-        //     x++;
-        // }
+        if(increase){ 
+            //Block* load_block = new Block(mode, x, y, index);
+            board.push(x, y, mode, index);
+            index++;
+            x++;
+        }
             
     }
 }
 
 //<<<<<<< HEAD
 //=======
-/*
+
 void display_board(Board& board){
 	for(Block* curr=board.origin; curr;curr=curr->next){
 		if(curr->state==1){
@@ -96,7 +96,7 @@ void display_board(Board& board){
 			std::cout<<"0";
 		}
 	}
-}*/
+}
 //>>>>>>> 0fbf8c3f3b997deeb78e1096a71b95d3d102554e
 
 
@@ -106,7 +106,7 @@ void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned i
         //since down is last check of moves, check until down has ran, or no_moves
         //inputting for each block in board
         while(!((curr->flag & NO_MOVES) == NO_MOVES) || !((curr->flag & DOWN) == DOWN)){
-            int temp = curr->check_block_moves(board.origin);
+            int temp = (int)curr->check_block_moves(board.origin);
             if (temp != -1)
                 curr->destins.push_back(temp);
             else

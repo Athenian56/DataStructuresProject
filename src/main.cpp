@@ -22,11 +22,11 @@ int main(int argc, char *argv[]){
     read_level(board,bcubed_infile); //reads level
 
     /* Solve Puzzle */
-    UNOR_MAP<int, VECTOR<int>> solver_data;
+    UNOR_MAP<long unsigned int, VECTOR<long unsigned int>> solver_data;
     store_data(board, solver_data);
 	
-	 COUT<<"Printing Data"<<ENDL
-	 display_board(board);
+	 COUT<<"Printing Data"<<ENDL;
+	 //display_board(board);
 	 COUT<<ENDL;
     /* DEBUGGING */ 
     COUT << "hash table" << ENDL;
