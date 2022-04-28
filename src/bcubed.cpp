@@ -114,6 +114,17 @@ void key(){
 
 }
 
+void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
+	for(long signed int i=vec.size()-1;i>-1;i--){
+		
+		vec[i]=s.top();
+		s.pop();
+	}
+	COUT<<ENDL;
+	
+}
+
+
 void display_initial_board(Board& board){
 
 	VECTOR<char> vect(MAX_SIZE,' ');

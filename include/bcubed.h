@@ -13,12 +13,14 @@
 #include <iomanip>
 #include <unordered_map>
 #include <cstdlib>
+#include <stack>
 #include <fstream>
 #include "board.h"
 
 #define UNOR_MAP std::unordered_map
 #define IFSTREAM std::ifstream
 #define OFSTREAM std::ofstream
+#define STACK std::stack
 
 //functions
 void usage(int,char *progname);
@@ -32,6 +34,8 @@ void display_initial_board(Board& board);
 void display_final_board(VECTOR<int>&path, Board& board);
 
 long unsigned int LinearSearch(VECTOR<int> &path, int x);
+
+void convert_vect(STACK<int>&s, VECTOR<int>&path);
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data);
 

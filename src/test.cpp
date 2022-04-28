@@ -25,10 +25,17 @@ int main(int argc, char* argv[]){
     COUT<<"Display initial board"<<ENDL;
 	 display_initial_board(board);
 
-	 VECTOR<int> test_path;
+	 STACK<int> test_stack;//initialize stack, will not need in main
 	 for(int i=0;i<25;i++){
-		 test_path.push_back(i);
+		 test_stack.push(i);
 	 }
+	
+	 COUT<<ENDL;
+
+	 VECTOR<int>test_path (test_stack.size(),0);//initialize path to have same size as stack, will need in main
+
+	 convert_vect(test_stack, test_path);
+
 	 COUT<<"Display solved table"<<ENDL;
 	 display_final_board(test_path,board);
 

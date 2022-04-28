@@ -160,6 +160,15 @@ long unsigned int LinearSearch(VECTOR<int> &path,int x){
 	return -1;
 }
 
+void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
+	for(long signed int i=vec.size()-1;i>-1;i--){
+		
+		vec[i]=s.top();
+		s.pop();
+	}
+	COUT<<ENDL;
+	
+}
 
 
 void store_data(Board& board, UNOR_MAP<int, VECTOR<int>>& solver_data){
