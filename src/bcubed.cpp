@@ -269,6 +269,8 @@ void index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<lon
 
 				//recursive call meant to run through the possible blocks of the current possible block and so on
 				index_check( solver_data[ index ][ iter ], solver_data, parents, visited );
+				//check if parents contains only 1 -1, if so return(found path) if not set current index's parent back to negative one and loop
+				//back up to that
 			}
 		}
 	}
