@@ -105,6 +105,8 @@ void store_data(Board& board, UNOR_MAP<long unsigned int, VECTOR<long unsigned i
     //pointer that will traverse board and store data into hash map
     for(Block* curr = board.origin; curr; curr = curr->next){
         //since down is last check of moves, check until down has ran, or no_moves
+	if(curr->mode == 2)
+		continue;
         //inputting for each block in board
 		if(curr->mode==2){
 			continue;
@@ -137,9 +139,9 @@ void key(){
 }
 
 void convert_vect(STACK<int>&s,VECTOR<int>&vec){//converts stack to vector
-	for(long signed int i=vec.size()-1;i>-1;i--){		
+	for(long unsigned int i=0;i<vec.size();i++){		
 		vec[i]=s.top();
-		COUT << vec[i] << ENDL;
+		// COUT << vec[i] << ENDL;
 		s.pop();
 	}
 	COUT<<ENDL;
@@ -192,26 +194,42 @@ void display_initial_board(Board& board){
 
 void display_final_board(VECTOR<int>&path, Board& board){
 //loop through vector of ints
+	// COUT<<"PRINT PATH"<<ENDL;
+	for(long unsigned int i=0;i<path.size();i++){
+		// COUT<<path[i]<<ENDL;
 
-	VECTOR<char> vect(MAX_SIZE,' ');
-	VECTOR<VECTOR<char>> display (MAX_SIZE, vect);//create display of 0s.
-
+	}
+	VECTOR<long unsigned int> vect(MAX_SIZE,999);
+	VECTOR<VECTOR<long unsigned int>> display (MAX_SIZE, vect);//create display of 0s.
+	COUT<<"BOARD:"<<ENDL;
+	//COUT<<board.origin->index<<ENDL;
 		for(Block* curr=board.origin;curr;curr=curr->next){//loop through blocks, set space on the board with the block's index
-			display[curr->y][curr->x]=(char)(curr->index);
+			display[curr->y][curr->x]=(curr->index);
+
+			//COUT<<display[curr->y][curr->x]<<ENDL;
 		}
 		
 		
-		long signed int temp;
+		long unsigned int temp;
 		int x;//to be searched
 		for(long signed int i=MAX_SIZE-1;i>-1;i--){
 			for(long signed int j=0;j<MAX_SIZE;j++){
-				if(display[i][j]!=' '){//if index, search path for the index, and display index 
+				if(display[i][j]!=999){//if index, search path for the index, and display index 
+					//COUT<<display[i][j]<<ENDL;
 					x=(int)display[i][j];
-					temp=LinearSearch(path, x);	
-					COUT <<std::setw(3)<< temp;
+					//COUT<<x<< " ";
+					temp=LinearSearch(path, x);
+					if(temp==0){
+						COUT<<std::setw(3)<<"S";
+					}	
+					else if(temp==999)
+						COUT<<std::setw(3)<<"E";
+					//COUT<<temp;
+					else
+						COUT <<std::setw(3)<< temp;
 				}
 				
-				if(display[i][j]==' '){
+				if(display[i][j]==999){
 					COUT <<std::setw(3)<<" ";
 				}
 			}
@@ -222,14 +240,15 @@ void display_final_board(VECTOR<int>&path, Board& board){
 }
 
 
-long unsigned int LinearSearch(VECTOR<int> &path,int x){
-	for(long unsigned int i=0;i<path.size();i++){
-		if(path[i]==x){
-			return i;
-		}
-	}	
-	return -1;
-}
+ long unsigned int LinearSearch(VECTOR<int> &path,int x){
+ 	for(long unsigned int i=0;i<path.size();i++){
+ 		if(path[i]==x){
+			//COUT<<i;
+ 			return i;
+ 		}
+ 	}	
+ 	return 999;
+ }
 
 
 
@@ -266,7 +285,7 @@ void index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<lon
 		//set visited index to true
 		visited [ index ] = true;
 
-		COUT << "SIZE: " << solver_data[index].size() << ENDL;
+		//COUT << "SIZE: " << solver_data[index].size() << ENDL;
 		
 		//check each possible block
 		for ( long unsigned int iter = 0; iter < solver_data[index].size(); iter++ )
@@ -274,22 +293,31 @@ void index_check(long unsigned int index, UNOR_MAP<long unsigned int, VECTOR<lon
 			//if index of possible block has not been visited, resursive call is made
 			if ( !visited[ solver_data[ index ][ iter ] ] )
 			{
+				parents[ solver_data[ index ][ iter ] ] = (int)index;
+				if(count==1)return;
 				for(long unsigned int jter = 0; jter < parents.size(); jter++){
-					COUT << jter <<":  "<< parents[jter] << ENDL;	 
+					//COUT << jter <<":  "<< parents[jter] << ENDL;	 
 					 if(parents[jter] == -1){
 						count++;
 					 }
 				}
 
-				COUT << "COUNT: " << count << ENDL;
+				//COUT << "COUNT: " << count << ENDL;
 
-				if(count == 1) {
-					COUT << "returning" << ENDL;
-					return;
-				}
+				// if(count == 1) {
+				// 	COUT << "returning" << ENDL;
+				// 	return;
+				// }
 
 				//set the possible block's parent as the current index
-				parents[ solver_data[ index ][ iter ] ] = (int)index;
+			  // parents[ solver_data[ index ][ iter ] ] = (int)index;
+
+
+
+				// if(count == 1) {
+				// 	COUT << "returning" << ENDL;
+				// 	return;
+				// }
 
 				//recursive call meant to run through the possible blocks of the current possible block and so on
 				//if(solver_data.size() == 0 )
